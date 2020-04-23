@@ -127,8 +127,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CoupleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="DAL\WDContext.cs" />
     <Compile Include="DAL\WDInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -185,6 +187,16 @@
     <Content Include="Views\Person\Details.cshtml" />
     <Content Include="Views\Person\Edit.cshtml" />
     <Content Include="Views\Person\Index.cshtml" />
+    <Content Include="Views\Couple\Create.cshtml" />
+    <Content Include="Views\Couple\Delete.cshtml" />
+    <Content Include="Views\Couple\Details.cshtml" />
+    <Content Include="Views\Couple\Edit.cshtml" />
+    <Content Include="Views\Couple\Index.cshtml" />
+    <Content Include="Views\Schedule\Create.cshtml" />
+    <Content Include="Views\Schedule\Delete.cshtml" />
+    <Content Include="Views\Schedule\Details.cshtml" />
+    <Content Include="Views\Schedule\Edit.cshtml" />
+    <Content Include="Views\Schedule\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
