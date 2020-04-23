@@ -8,7 +8,7 @@ namespace WalkingDinner.Models
 {
     public class Schedule
     {
-        public int ScheduleId { get; set; }
+        public int ScheduleID { get; set; }
         [Required]
         public int GroupSize { get; set; }
         [Required]

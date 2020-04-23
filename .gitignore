@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/WalkingDinner/Migrations/202004231147507_Initial.resx
+/WalkingDinner/Migrations/202004231147507_Initial.Designer.cs
+/WalkingDinner/Migrations/202004231147507_Initial.cs

@@ -8,7 +8,7 @@ namespace WalkingDinner.Models
 {
     public class Person
     {
-        public int PersonId { get; set; }
+        public int PersonID { get; set; }
         [Required]
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -18,6 +18,8 @@ namespace WalkingDinner.Models
         public string ZipCode { get; set; }
         [Required]
         public string Address { get; set; }
+        [Required]
+        public string City { get; set; }
         [Required]
         public string TelephoneNumber { get; set; }
         public string DietComments { get; set; }
