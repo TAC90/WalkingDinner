@@ -25,6 +25,9 @@ namespace WalkingDinner
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            //Custom validation scripts
+            bundles.Add(new ScriptBundle("~/bundles/validation").Include(
+                "~/Scripts/Validation.js"));
         }
     }
 }

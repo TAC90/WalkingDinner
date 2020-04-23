@@ -7,10 +7,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Person</h4>
         <hr />
@@ -42,8 +42,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @id = "zipcodeBox", @onblur = "zipcodeCheck()"} })
+                @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger", @id = "zipcodeError"})
             </div>
         </div>
 
@@ -66,8 +66,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TelephoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TelephoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TelephoneNumber, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.TelephoneNumber, new { htmlAttributes = new { @class = "form-control", @id = "telBox", @onblur = "telCheck()" } })
+                @Html.ValidationMessageFor(model => model.TelephoneNumber, "", new { @class = "text-danger", @id = "telError" })
             </div>
         </div>
 
@@ -93,4 +93,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/validation")
+
 }
