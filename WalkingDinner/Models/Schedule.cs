@@ -10,11 +10,15 @@ namespace WalkingDinner.Models
     {
         public int ScheduleID { get; set; }
         [Required]
+        public string Title { get; set; }
+        public DateTime? Date { get; set; }
+        [Required]
         public int GroupSize { get; set; }
         [Required]
         public int MaxCouples { get; set; }
         public Dictionary<int, int> Course { get; set; } //Id as schedule + CoupleId
-        public string Address { get; set; }
+        [Required]
+        public virtual Person Organizer { get; set; }
     }
 }
 

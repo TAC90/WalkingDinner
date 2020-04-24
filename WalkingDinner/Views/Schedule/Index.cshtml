@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<WalkingDinner.Models.Schedule>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Schedules";
 }
 
 <h2>Index</h2>
@@ -12,34 +12,58 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.GroupSize)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MaxCouples)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.Organizer)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.GroupSize)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaxCouples)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ScheduleID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ScheduleID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ScheduleID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr id="@item.ScheduleID" onclick="selectSchedule(@item.ScheduleID)">
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxCouples)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Organizer.FullName)
+            </td>
+        </tr>
+    }
 
 </table>
+
+@Html.ActionLink("Continue", "Create", "Couple", new { scheduleId = "0" }, new { @id = "selectSchedule", @hidden = "true"})
+
+@*@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="selectedSchedule" required="required" />
+    <input type="submit" value="Continue">
+}*@
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/validation")
+
+}

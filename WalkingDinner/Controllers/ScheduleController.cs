@@ -20,7 +20,7 @@ namespace WalkingDinner.Controllers
         {
             return View(db.Schedules.ToList());
         }
-
+        
         // GET: Schedule/Details/5
         public ActionResult Details(int? id)
         {
@@ -47,7 +47,7 @@ namespace WalkingDinner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ScheduleID,GroupSize,MaxCouples,Address")] Schedule schedule)
+        public ActionResult Create([Bind(Include = "ScheduleID,Title,Date,GroupSize,MaxCouples")] Schedule schedule)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace WalkingDinner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ScheduleID,GroupSize,MaxCouples,Address")] Schedule schedule)
+        public ActionResult Edit([Bind(Include = "ScheduleID,Title,Date,GroupSize,MaxCouples")] Schedule schedule)
         {
             if (ModelState.IsValid)
             {

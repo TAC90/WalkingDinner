@@ -31,15 +31,22 @@
                 new Person{PersonID=7,FirstName="Iris",LastName="West",ZipCode="12345",Address="Some Appartment 1",City="Star City",TelephoneNumber="123 456 7890"},
                 new Person{PersonID=8,FirstName="Steve",LastName="Trevor",ZipCode="12345",Address="Clay Home 1",City="Themyscira",TelephoneNumber="123 456 7890"},
             };
-            var couple = new List<Couple>
+            var couples = new List<Couple>
             {
                 new Couple{CoupleID=1,Person1=people[0],Person2=people[5]},
                 new Couple{CoupleID=2,Person1=people[1],Person2=people[6]},
                 new Couple{CoupleID=3,Person1=people[2],Person2=people[7]},
                 new Couple{CoupleID=4,Person1=people[3],Person2=people[4]},
             };
+            var schedules = new List<Schedule>
+            {
+                new Schedule{ScheduleID=1, Organizer=people[0], Date=new DateTime(2020,5,10), Title="Birthday Extravaganza", MaxCouples=8, GroupSize=4},
+                new Schedule{ScheduleID=2, Organizer=people[0], Date=new DateTime(2020,5,14), Title="Funeral Extravaganza", MaxCouples=12, GroupSize=3},
+                new Schedule{ScheduleID=3, Organizer=people[0], Date=new DateTime(2020,5,30), Title="Clown Extravaganza", MaxCouples=4, GroupSize=2},
+            };
             context.People.AddOrUpdate(people.ToArray());
-            context.Couples.AddOrUpdate(couple.ToArray());
+            context.Couples.AddOrUpdate(couples.ToArray());
+            context.Schedules.AddOrUpdate(schedules.ToArray());
             context.SaveChanges();
         }
     }

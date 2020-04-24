@@ -37,7 +37,7 @@ namespace WalkingDinner.Controllers
         }
 
         // GET: Couple/Create
-        public ActionResult Create()
+        public ActionResult Create(int? scheduleID)
         {
             return View();
         }

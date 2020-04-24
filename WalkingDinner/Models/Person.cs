@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -23,5 +24,11 @@ namespace WalkingDinner.Models
         [Required]
         public string TelephoneNumber { get; set; }
         public string DietComments { get; set; }
+        [NotMapped]
+        public string FullName {
+            get {
+                return $"{FirstName} {LastName}";
+            }
+        }
     }
 }

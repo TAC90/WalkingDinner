@@ -135,9 +135,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202004231147507_Initial.cs" />
-    <Compile Include="Migrations\202004231147507_Initial.designer.cs">
-      <DependentUpon>202004231147507_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202004241025040_ScheduleExpansion.cs" />
+    <Compile Include="Migrations\202004241025040_ScheduleExpansion.designer.cs">
+      <DependentUpon>202004241025040_ScheduleExpansion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004241033025_ScheduleFix.cs" />
+    <Compile Include="Migrations\202004241033025_ScheduleFix.designer.cs">
+      <DependentUpon>202004241033025_ScheduleFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004241035438_SeedOnly.cs" />
+    <Compile Include="Migrations\202004241035438_SeedOnly.designer.cs">
+      <DependentUpon>202004241035438_SeedOnly.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Couple.cs" />
@@ -192,11 +200,12 @@
     <Content Include="Views\Couple\Details.cshtml" />
     <Content Include="Views\Couple\Edit.cshtml" />
     <Content Include="Views\Couple\Index.cshtml" />
+    <Content Include="Views\Schedule\Index.cshtml" />
     <Content Include="Views\Schedule\Create.cshtml" />
     <Content Include="Views\Schedule\Delete.cshtml" />
     <Content Include="Views\Schedule\Details.cshtml" />
     <Content Include="Views\Schedule\Edit.cshtml" />
-    <Content Include="Views\Schedule\Index.cshtml" />
+    <Content Include="Views\Schedule\-Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -215,8 +224,14 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004231147507_Initial.resx">
-      <DependentUpon>202004231147507_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004241025040_ScheduleExpansion.resx">
+      <DependentUpon>202004241025040_ScheduleExpansion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004241033025_ScheduleFix.resx">
+      <DependentUpon>202004241033025_ScheduleFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004241035438_SeedOnly.resx">
+      <DependentUpon>202004241035438_SeedOnly.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
