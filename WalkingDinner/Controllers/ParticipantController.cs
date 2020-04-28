@@ -11,107 +11,108 @@ using WalkingDinner.Models;
 
 namespace WalkingDinner.Controllers
 {
-    public class CoupleController : Controller
+    public class ParticipantController : Controller
     {
         private WDContext db = new WDContext();
 
-        // GET: Couple
+        // GET: Participant
         public ActionResult Index()
         {
-            return View(db.Couples.ToList());
+            return View(db.Participants.ToList());
         }
 
-        // GET: Couple/Details/5
+        // GET: Participant/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Couple couple = db.Couples.Find(id);
-            if (couple == null)
+            Participant participant = db.Participants.Find(id);
+            if (participant == null)
             {
                 return HttpNotFound();
             }
-            return View(couple);
+            return View(participant);
         }
 
-        // GET: Couple/Create
-        public ActionResult Create(int? scheduleID)
+        // GET: Participant/Create
+        public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Couple/Create
+        // POST: Participant/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CoupleID")] Couple couple)
+        public ActionResult Create([Bind(Include = "ParticipantID,Solo,FirstName,MiddleName,LastName,FirstNamePartner,MiddleNamePartner,LastNamePartner,ZipCode,Address,City,TelephoneNumber,DietComments")] Participant participant)
         {
-            if (ModelState.IsValid)
+            //TODO: Schedule ID shennigans
+            if (ModelState.IsValid && int.TryParse(Request.QueryString["scheduleId"], out int selectedID))
             {
-                db.Couples.Add(couple);
+                participant.Schedules.Add(db.Schedules.Find(selectedID));
+                db.Participants.Add(participant);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Schedule");
             }
-
-            return View(couple);
+            return View(participant);
         }
 
-        // GET: Couple/Edit/5
+        // GET: Participant/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Couple couple = db.Couples.Find(id);
-            if (couple == null)
+            Participant participant = db.Participants.Find(id);
+            if (participant == null)
             {
                 return HttpNotFound();
             }
-            return View(couple);
+            return View(participant);
         }
 
-        // POST: Couple/Edit/5
+        // POST: Participant/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CoupleID")] Couple couple)
+        public ActionResult Edit([Bind(Include = "ParticipantID,Solo,FirstName,MiddleName,LastName,FirstNamePartner,MiddleNamePartner,LastNamePartner,ZipCode,Address,City,TelephoneNumber,DietComments")] Participant participant)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(couple).State = EntityState.Modified;
+                db.Entry(participant).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(couple);
+            return View(participant);
         }
 
-        // GET: Couple/Delete/5
+        // GET: Participant/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Couple couple = db.Couples.Find(id);
-            if (couple == null)
+            Participant participant = db.Participants.Find(id);
+            if (participant == null)
             {
                 return HttpNotFound();
             }
-            return View(couple);
+            return View(participant);
         }
 
-        // POST: Couple/Delete/5
+        // POST: Participant/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Couple couple = db.Couples.Find(id);
-            db.Couples.Remove(couple);
+            Participant participant = db.Participants.Find(id);
+            db.Participants.Remove(participant);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

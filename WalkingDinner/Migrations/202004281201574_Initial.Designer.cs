@@ -7,13 +7,13 @@ namespace WalkingDinner.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class ScheduleFix : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ScheduleFix));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "202004241033025_ScheduleFix"; }
+            get { return "202004281201574_Initial"; }
         }
         
         string IMigrationMetadata.Source

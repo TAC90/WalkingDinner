@@ -1,4 +1,5 @@
-﻿function zipcodeCheck() {
+﻿//Validation scripts
+function zipcodeCheck() {
     var patt = /^\d{4}[ -]?[A-Z]{2}$/i;
 
     var zipcodeBox = document.getElementById("zipcodeBox");
@@ -33,25 +34,11 @@ function telCheck() {
         messageBox.innerHTML = "Invalid phone number!";
     }
 }
+//--------------------------//
 
+//Selection of schedule
 var previousScheduleID = 0;
 var selectedScheduleColor = "green";
-
-//function selectSchedule2(scheduleID) {
-
-//    var selectedSchedule = document.getElementById(scheduleID);
-//    selectedSchedule.style.backgroundColor = selectedScheduleColor;
-
-//    if (previousScheduleID != null){
-//        var previousSchedule = document.getElementById(previousScheduleID);
-//        console.log(previousSchedule.style.backgroundColor);
-//        if (selectedSchedule != previousSchedule) {
-//            //previousSchedule.style.backgroundColor = "";
-//            previousSchedule.removeAttribute("style");
-//        }
-//    }
-//    previousScheduleID = scheduleID;
-//}
 
 function selectSchedule(scheduleID) {
     var selectedSchedule = document.getElementById(scheduleID);
@@ -76,5 +63,20 @@ function selectSchedule(scheduleID) {
         console.log(selectedHref);
         button.setAttribute("href", selectedHref);
         button.removeAttribute("hidden");
+    }
+}
+
+
+// Enable/Disable partner's input on checkbox input
+function isSolo() {
+    if (document.getElementById("soloCheckBox").checked) {
+        document.getElementById("firstNamePartnerTB").disabled = true;
+        document.getElementById("middleNamePartnerTB").disabled = true;
+        document.getElementById("lastNamePartnerTB").disabled = true;
+    }
+    else {
+        document.getElementById("firstNamePartnerTB").disabled = false;
+        document.getElementById("middleNamePartnerTB").disabled = false;
+        document.getElementById("lastNamePartnerTB").disabled = false;
     }
 }

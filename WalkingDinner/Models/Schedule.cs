@@ -8,17 +8,21 @@ namespace WalkingDinner.Models
 {
     public class Schedule
     {
+        public Schedule()
+        {
+            this.Participants = new HashSet<Participant>();
+        }
         public int ScheduleID { get; set; }
+        public bool Active { get; set; }
         [Required]
         public string Title { get; set; }
         public DateTime? Date { get; set; }
         [Required]
         public int GroupSize { get; set; }
         [Required]
-        public int MaxCouples { get; set; }
-        public Dictionary<int, int> Course { get; set; } //Id as schedule + CoupleId
-        [Required]
-        public virtual Person Organizer { get; set; }
+        public int MaxParticipants { get; set; }
+        public virtual ICollection<Participant> Participants { get; set; }
+        public Dictionary<int, int> Course { get; set; } //Id as schedule + ParticipantId
     }
 }
 

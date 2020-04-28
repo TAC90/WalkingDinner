@@ -13,8 +13,7 @@ namespace WalkingDinner.DAL
         public WDContext() : base("name=WDDBConnection")
         {
         }
-        public DbSet<Person> People { get; set; }
-        public DbSet<Couple> Couples { get; set; }
+        public DbSet<Participant> Participants { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)

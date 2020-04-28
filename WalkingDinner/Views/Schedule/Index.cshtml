@@ -21,10 +21,7 @@
             @Html.DisplayNameFor(model => model.GroupSize)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MaxCouples)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Organizer)
+            @Html.DisplayNameFor(model => model.MaxParticipants)
         </th>
         <th></th>
     </tr>
@@ -42,17 +39,14 @@
                 @Html.DisplayFor(modelItem => item.GroupSize)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MaxCouples)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Organizer.FullName)
+                @Html.DisplayFor(modelItem => item.MaxParticipants)
             </td>
         </tr>
     }
 
 </table>
 
-@Html.ActionLink("Continue", "Create", "Couple", new { scheduleId = "0" }, new { @id = "selectSchedule", @hidden = "true"})
+@Html.ActionLink("Continue", "Create", "Participant", new { scheduleId = "0" }, new { @id = "selectSchedule", @hidden = "true"})
 
 @*@using (Html.BeginForm())
 {

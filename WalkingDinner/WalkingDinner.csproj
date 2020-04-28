@@ -127,29 +127,19 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\CoupleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\ParticipantController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="DAL\WDContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202004241025040_ScheduleExpansion.cs" />
-    <Compile Include="Migrations\202004241025040_ScheduleExpansion.designer.cs">
-      <DependentUpon>202004241025040_ScheduleExpansion.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004241033025_ScheduleFix.cs" />
-    <Compile Include="Migrations\202004241033025_ScheduleFix.designer.cs">
-      <DependentUpon>202004241033025_ScheduleFix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004241035438_SeedOnly.cs" />
-    <Compile Include="Migrations\202004241035438_SeedOnly.designer.cs">
-      <DependentUpon>202004241035438_SeedOnly.cs</DependentUpon>
+    <Compile Include="Migrations\202004281201574_Initial.cs" />
+    <Compile Include="Migrations\202004281201574_Initial.designer.cs">
+      <DependentUpon>202004281201574_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Couple.cs" />
-    <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\Participant.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -190,22 +180,17 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Person\Create.cshtml" />
-    <Content Include="Views\Person\Delete.cshtml" />
-    <Content Include="Views\Person\Details.cshtml" />
-    <Content Include="Views\Person\Edit.cshtml" />
-    <Content Include="Views\Person\Index.cshtml" />
-    <Content Include="Views\Couple\Create.cshtml" />
-    <Content Include="Views\Couple\Delete.cshtml" />
-    <Content Include="Views\Couple\Details.cshtml" />
-    <Content Include="Views\Couple\Edit.cshtml" />
-    <Content Include="Views\Couple\Index.cshtml" />
     <Content Include="Views\Schedule\Index.cshtml" />
     <Content Include="Views\Schedule\Create.cshtml" />
     <Content Include="Views\Schedule\Delete.cshtml" />
     <Content Include="Views\Schedule\Details.cshtml" />
     <Content Include="Views\Schedule\Edit.cshtml" />
     <Content Include="Views\Schedule\-Index.cshtml" />
+    <Content Include="Views\Participant\Create.cshtml" />
+    <Content Include="Views\Participant\Delete.cshtml" />
+    <Content Include="Views\Participant\Details.cshtml" />
+    <Content Include="Views\Participant\Edit.cshtml" />
+    <Content Include="Views\Participant\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -224,14 +209,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004241025040_ScheduleExpansion.resx">
-      <DependentUpon>202004241025040_ScheduleExpansion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004241033025_ScheduleFix.resx">
-      <DependentUpon>202004241033025_ScheduleFix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004241035438_SeedOnly.resx">
-      <DependentUpon>202004241035438_SeedOnly.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004281201574_Initial.resx">
+      <DependentUpon>202004281201574_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

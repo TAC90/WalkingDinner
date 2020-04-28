@@ -1,4 +1,4 @@
-﻿@model WalkingDinner.Models.Person
+﻿@model WalkingDinner.Models.Participant
 
 @{
     ViewBag.Title = "Details";
@@ -7,9 +7,17 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Person</h4>
+    <h4>Participant</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Solo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Solo)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
@@ -32,6 +40,30 @@
 
         <dd>
             @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstNamePartner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstNamePartner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MiddleNamePartner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MiddleNamePartner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastNamePartner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastNamePartner)
         </dd>
 
         <dt>
@@ -77,6 +109,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.PersonID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ParticipantID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

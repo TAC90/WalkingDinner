@@ -20,32 +20,31 @@
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
-            var people = new List<Person>
+            var participants = new List<Participant>
             {
-                new Person{PersonID=1,FirstName="Bruce",LastName="Wayne",ZipCode="12345",Address="Wayne Manor 1",City="Gotham",TelephoneNumber="123 456 7890"},
-                new Person{PersonID=2,FirstName="Barry",LastName="Allen",ZipCode="12345",Address="Some Appartment 1",City="Star City",TelephoneNumber="123 456 7890"},
-                new Person{PersonID=3,FirstName="Diana",LastName="Prince",ZipCode="12345",Address="Clay Home 1",City="Themyscira",TelephoneNumber="123 456 7890"},
-                new Person{PersonID=4,FirstName="Clark",LastName="Kent",ZipCode="12345",Address="Kent Farm 1",City="Smallville",TelephoneNumber="123 456 7890"},
-                new Person{PersonID=5,FirstName="Lois",LastName="Lane",ZipCode="12345",Address="Kent Farm 1",City="Smalville",TelephoneNumber="123 456 7890"},
-                new Person{PersonID=6,FirstName="Selina",LastName="Kyle",ZipCode="12345",Address="Wayne Manor 1",City="Gotham",TelephoneNumber="123 456 7890"},
-                new Person{PersonID=7,FirstName="Iris",LastName="West",ZipCode="12345",Address="Some Appartment 1",City="Star City",TelephoneNumber="123 456 7890"},
-                new Person{PersonID=8,FirstName="Steve",LastName="Trevor",ZipCode="12345",Address="Clay Home 1",City="Themyscira",TelephoneNumber="123 456 7890"},
-            };
-            var couples = new List<Couple>
-            {
-                new Couple{CoupleID=1,Person1=people[0],Person2=people[5]},
-                new Couple{CoupleID=2,Person1=people[1],Person2=people[6]},
-                new Couple{CoupleID=3,Person1=people[2],Person2=people[7]},
-                new Couple{CoupleID=4,Person1=people[3],Person2=people[4]},
+                new Participant{ParticipantID=1,FirstName="Bruce",LastName="Wayne",ZipCode="12345",Address="Wayne Manor 1",City="Gotham",TelephoneNumber="123 456 7890", 
+                FirstNamePartner="Selina",LastNamePartner="Kyle"},
+                new Participant{ParticipantID=2,FirstName="Barry",LastName="Allen",ZipCode="12345",Address="Some Appartment 1",City="Star City",TelephoneNumber="123 456 7890",
+                FirstNamePartner="Iris",LastNamePartner="West"},
+                new Participant{ParticipantID=3,FirstName="Diana",LastName="Prince",ZipCode="12345",Address="Clay Home 1",City="Themyscira",TelephoneNumber="123 456 7890",
+                FirstNamePartner="Steve",LastNamePartner="Trevor"},
+                new Participant{ParticipantID=4,FirstName="Clark",LastName="Kent",ZipCode="12345",Address="Kent Farm 1",City="Smallville",TelephoneNumber="123 456 7890",
+                FirstNamePartner="Lois",LastNamePartner="Lane"},
             };
             var schedules = new List<Schedule>
             {
-                new Schedule{ScheduleID=1, Organizer=people[0], Date=new DateTime(2020,5,10), Title="Birthday Extravaganza", MaxCouples=8, GroupSize=4},
-                new Schedule{ScheduleID=2, Organizer=people[0], Date=new DateTime(2020,5,14), Title="Funeral Extravaganza", MaxCouples=12, GroupSize=3},
-                new Schedule{ScheduleID=3, Organizer=people[0], Date=new DateTime(2020,5,30), Title="Clown Extravaganza", MaxCouples=4, GroupSize=2},
+                new Schedule{ScheduleID=1, Active = true, Date=new DateTime(2020,5,10), Title="Birthday Extravaganza", MaxParticipants=8, GroupSize=4, Participants = new List<Participant>()},
+                new Schedule{ScheduleID=2, Active = false, Date=new DateTime(2020,5,14), Title="Funeral Extravaganza", MaxParticipants=12, GroupSize=3, Participants = new List<Participant>()},
+                new Schedule{ScheduleID=3, Active = true, Date=new DateTime(2020,5,30), Title="Clown Extravaganza", MaxParticipants=4, GroupSize=2, Participants = new List<Participant>()},
             };
-            context.People.AddOrUpdate(people.ToArray());
-            context.Couples.AddOrUpdate(couples.ToArray());
+            foreach(Participant p in participants)
+            {
+                schedules[0].Participants.Add(p);
+                schedules[1].Participants.Add(p);
+                schedules[2].Participants.Add(p);
+            }
+            //schedules.ForEach(s => context.Schedules.AddOrUpdate(p => p.ScheduleID, s));
+            context.Participants.AddOrUpdate(participants.ToArray());
             context.Schedules.AddOrUpdate(schedules.ToArray());
             context.SaveChanges();
         }

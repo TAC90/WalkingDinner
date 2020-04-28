@@ -7,14 +7,23 @@ using System.Web;
 
 namespace WalkingDinner.Models
 {
-    public class Person
+    public class Participant
     {
-        public int PersonID { get; set; }
+        public Participant()
+        {
+            this.Schedules = new HashSet<Schedule>();
+        }
+        public int ParticipantID { get; set; }
+        [Required]
+        public bool Solo { get; set; }
         [Required]
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         [Required]
         public string LastName { get; set; }
+        public string FirstNamePartner { get; set; }
+        public string MiddleNamePartner { get; set; }
+        public string LastNamePartner { get; set; }
         [Required]
         public string ZipCode { get; set; }
         [Required]
@@ -24,10 +33,22 @@ namespace WalkingDinner.Models
         [Required]
         public string TelephoneNumber { get; set; }
         public string DietComments { get; set; }
+
+        [Required]
+        public virtual ICollection<Schedule> Schedules { get; set; }
+
         [NotMapped]
-        public string FullName {
+        public string FullName
+        {
             get {
                 return $"{FirstName} {LastName}";
+            }
+        }
+        [NotMapped]
+        public string FullNamePartner
+        {
+            get {
+                return $"{FirstNamePartner} {LastNamePartner}";
             }
         }
     }
