@@ -106,6 +106,15 @@
             @Html.DisplayFor(model => model.DietComments)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Schedules)
+        </dt>
+
+        <dd>
+            @Html.ListBoxFor(model => model.Schedules, new MultiSelectList(Model.Schedules),new { multiple = "multiple" })
+            @*@Html.DisplayFor(model => model.Schedules)*@
+        </dd>
+
     </dl>
 </div>
 <p>

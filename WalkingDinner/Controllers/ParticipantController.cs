@@ -33,6 +33,8 @@ namespace WalkingDinner.Controllers
             {
                 return HttpNotFound();
             }
+            //TODO Ad, Fix this
+            //participant.Schedules = db.Schedules.Where(s => participant.Schedules.Contains(s)).ToList();
             return View(participant);
         }
 
@@ -52,12 +54,16 @@ namespace WalkingDinner.Controllers
             //TODO: Schedule ID shennigans
             if (ModelState.IsValid && int.TryParse(Request.QueryString["scheduleId"], out int selectedID))
             {
-                participant.Schedules.Add(db.Schedules.Find(selectedID));
-                db.Participants.Add(participant);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Schedule");
+                var schedule = db.Schedules.Find(selectedID);
+                if (schedule != null) {
+                    participant.Schedules.Add(schedule);
+                    db.Participants.Add(participant);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Schedule");
+                }
             }
             return View(participant);
+            //TODO: Return possible Error?
         }
 
         // GET: Participant/Edit/5
