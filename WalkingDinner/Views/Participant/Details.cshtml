@@ -111,7 +111,7 @@
         </dt>
 
         <dd>
-            @Html.ListBoxFor(model => model.Schedules, new MultiSelectList(Model.Schedules),new { multiple = "multiple" })
+            @Html.ListBoxFor(model => model.Schedules, new MultiSelectList(Model.Schedules,"ScheduleID","Title"), new { multiple = "multiple" })
             @*@Html.DisplayFor(model => model.Schedules)*@
         </dd>
 

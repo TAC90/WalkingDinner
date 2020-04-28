@@ -90,6 +90,20 @@ namespace WalkingDinner.Controllers
         {
             if (ModelState.IsValid)
             {
+                //TODO: Schedules gets int array, replace schedule id's in participants
+                //var scheduleIds = Request.Form.Get("Schedules");
+                //var schedulesToRemove = db.Schedules.Include("Participants").Where(s => s.Participants.Contains(participant));
+                //foreach (var s in schedulesToRemove) { 
+                //    s.Participants.Remove(participant);
+                //    db.Entry(s).State = EntityState.Modified;
+                //}
+                //foreach(var id in scheduleIds.Split(','))
+                //{
+                //    int i = int.Parse(id);
+                //    participant.Schedules.Add(
+                //        db.Schedules.FirstOrDefault(s => s.ScheduleID == i));
+                //}
+                //foreach(int id in )
                 db.Entry(participant).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
