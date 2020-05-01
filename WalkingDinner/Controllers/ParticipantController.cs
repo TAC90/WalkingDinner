@@ -78,7 +78,8 @@ namespace WalkingDinner.Controllers
             {
                 return HttpNotFound();
             }
-            return View(participant);
+            var participantViewModel = new ParticipantViewModel(participant);
+            return View(participantViewModel);
         }
 
         // POST: Participant/Edit/5
@@ -86,29 +87,29 @@ namespace WalkingDinner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ParticipantID,Solo,FirstName,MiddleName,LastName,FirstNamePartner,MiddleNamePartner,LastNamePartner,ZipCode,Address,City,TelephoneNumber,DietComments")] Participant participant)
+        public ActionResult Edit([Bind(Include = "Participant")] ParticipantViewModel participantVM)
+        //public ActionResult Edit([Bind(Include = "ParticipantID,Solo,FirstName,MiddleName,LastName,FirstNamePartner,MiddleNamePartner,LastNamePartner,ZipCode,Address,City,TelephoneNumber,DietComments")] ParticipantViewModel participantVM)
+        //public ActionResult Edit([Bind(Include = "Participant.ParticipantID,Participant.Solo,Participant.FirstName,Participant.MiddleName,Participant.LastName,Participant.FirstNamePartner,Participant.MiddleNamePartner,Participant.LastNamePartner,Participant.ZipCode,Participant.Address,Participant.City,Participant.TelephoneNumber,Participant.DietComments")]  ParticipantViewModel participantVM)
+        //public ActionResult Edit([Bind(Exclude = "Schedules")] ParticipantViewModel participantVM)
         {
+            ModelState.Remove("Participant.Schedules");
             if (ModelState.IsValid)
             {
-                //TODO: Schedules gets int array, replace schedule id's in participants
-                //var scheduleIds = Request.Form.Get("Schedules");
-                //var schedulesToRemove = db.Schedules.Include("Participants").Where(s => s.Participants.Contains(participant));
-                //foreach (var s in schedulesToRemove) { 
-                //    s.Participants.Remove(participant);
-                //    db.Entry(s).State = EntityState.Modified;
-                //}
-                //foreach(var id in scheduleIds.Split(','))
-                //{
-                //    int i = int.Parse(id);
-                //    participant.Schedules.Add(
-                //        db.Schedules.FirstOrDefault(s => s.ScheduleID == i));
-                //}
+                var oldParticipant = db.Participants.FirstOrDefault(p => p.ParticipantID == participantVM.Participant.ParticipantID);
+                var scheduleIds = Request.Form.Get("Participant.Schedules");
+                oldParticipant.Schedules.Clear();
+                foreach (var id in scheduleIds.Split(','))
+                {
+                    int i = int.Parse(id);
+                    oldParticipant.Schedules.Add(
+                        db.Schedules.FirstOrDefault(s => s.ScheduleID == i));
+                }
                 //foreach(int id in )
-                db.Entry(participant).State = EntityState.Modified;
+                db.Entry(oldParticipant).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(participant);
+            return View(participantVM);
         }
 
         // GET: Participant/Delete/5
