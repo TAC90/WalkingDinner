@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using WalkingDinner.DAL;
 using WalkingDinner.Models;
+using WalkingDinner.ViewModels;
 
 namespace WalkingDinner.Controllers
 {
@@ -88,9 +89,6 @@ namespace WalkingDinner.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Participant")] ParticipantViewModel participantVM)
-        //public ActionResult Edit([Bind(Include = "ParticipantID,Solo,FirstName,MiddleName,LastName,FirstNamePartner,MiddleNamePartner,LastNamePartner,ZipCode,Address,City,TelephoneNumber,DietComments")] ParticipantViewModel participantVM)
-        //public ActionResult Edit([Bind(Include = "Participant.ParticipantID,Participant.Solo,Participant.FirstName,Participant.MiddleName,Participant.LastName,Participant.FirstNamePartner,Participant.MiddleNamePartner,Participant.LastNamePartner,Participant.ZipCode,Participant.Address,Participant.City,Participant.TelephoneNumber,Participant.DietComments")]  ParticipantViewModel participantVM)
-        //public ActionResult Edit([Bind(Exclude = "Schedules")] ParticipantViewModel participantVM)
         {
             ModelState.Remove("Participant.Schedules");
             if (ModelState.IsValid)

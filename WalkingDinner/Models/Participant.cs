@@ -24,12 +24,16 @@ namespace WalkingDinner.Models
         public string FirstNamePartner { get; set; }
         public string MiddleNamePartner { get; set; }
         public string LastNamePartner { get; set; }
+        [RegularExpression(@"^\d{4}[ -]?[A-Z]{2}$",
+            ErrorMessage = "Please enter a valid Zip Code")]
         [Required]
         public string ZipCode { get; set; }
         [Required]
         public string Address { get; set; }
         [Required]
         public string City { get; set; }
+        [RegularExpression(@"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$",
+            ErrorMessage = "Please enter a valid Phone Number")]
         [Required]
         public string TelephoneNumber { get; set; }
         public string DietComments { get; set; }

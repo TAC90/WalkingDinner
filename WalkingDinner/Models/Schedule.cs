@@ -22,7 +22,7 @@ namespace WalkingDinner.Models
         [Required]
         public int MaxParticipants { get; set; }
         public virtual ICollection<Participant> Participants { get; set; }
-        public Dictionary<int, int> Course { get; set; } //Id as schedule + ParticipantId
+        public Dictionary<int, int> Program { get; set; } //Id as position + ParticipantId
     }
 }
 

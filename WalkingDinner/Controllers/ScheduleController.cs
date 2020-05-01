@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using WalkingDinner.DAL;
 using WalkingDinner.Models;
+using WalkingDinner.ViewModels;
 
 namespace WalkingDinner.Controllers
 {
@@ -18,7 +19,7 @@ namespace WalkingDinner.Controllers
         // GET: Schedule
         public ActionResult Index()
         {
-            return View(db.Schedules.ToList());
+            return View(db.Schedules.Where(s => s.MaxParticipants > s.Participants.Count).ToList());
         }
         
         // GET: Schedule/Details/5
@@ -115,6 +116,23 @@ namespace WalkingDinner.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult Program(int? id)
+        {
+            var schedule = db.Schedules.FirstOrDefault(s => s.ScheduleID == id);
+            if (schedule != null) {
+                var viewmodel = new ProgramViewModel()
+                {
+                    Participants = schedule.Participants,
+                    GroupSize = schedule.GroupSize,
+                    ScheduleTitle = schedule.Title,
+                    ScheduleID = schedule.ScheduleID
+                };
+                return View(viewmodel);
+            }
+            return RedirectToAction("Index");
+        }
+
 
         protected override void Dispose(bool disposing)
         {

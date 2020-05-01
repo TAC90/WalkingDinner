@@ -138,9 +138,14 @@
     <Compile Include="Migrations\202004281201574_Initial.designer.cs">
       <DependentUpon>202004281201574_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005011319090_course2program.cs" />
+    <Compile Include="Migrations\202005011319090_course2program.designer.cs">
+      <DependentUpon>202005011319090_course2program.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Participant.cs" />
-    <Compile Include="Models\ParticipantViewModel.cs" />
+    <Compile Include="ViewModels\ParticipantViewModel.cs" />
+    <Compile Include="ViewModels\ProgramViewModel.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -166,7 +171,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\Validation.js" />
+    <Content Include="Scripts\scripts.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -192,6 +197,7 @@
     <Content Include="Views\Participant\Details.cshtml" />
     <Content Include="Views\Participant\Edit.cshtml" />
     <Content Include="Views\Participant\Index.cshtml" />
+    <Content Include="Views\Schedule\Program.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -212,6 +218,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202004281201574_Initial.resx">
       <DependentUpon>202004281201574_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005011319090_course2program.resx">
+      <DependentUpon>202005011319090_course2program.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,49 @@
+﻿@model WalkingDinner.ViewModels.ProgramViewModel
+
+@{
+    ViewBag.Title = "Program";
+}
+
+<h2>Program</h2>
+
+<div>
+    <h4>ProgramViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ScheduleID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScheduleID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScheduleTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScheduleTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GroupSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroupSize)
+        </dd>
+
+        <dd>
+            @foreach (var p in Model.Participants) {
+                @Html.Hidden(p.FullName,p.ParticipantID, new {@id = p.ParticipantID.ToString() })
+            }
+            @*@Html.HiddenFor(model => model.Participants)*@
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
