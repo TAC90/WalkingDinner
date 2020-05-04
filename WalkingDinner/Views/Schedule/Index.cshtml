@@ -23,6 +23,10 @@
         <th>
             @Html.DisplayNameFor(model => model.MaxParticipants)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailableSpace)
+        </th>
+
         <th></th>
     </tr>
 
@@ -40,6 +44,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MaxParticipants)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvailableSpace)
             </td>
         </tr>
     }

@@ -32,12 +32,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.GroupSize)
+            @Html.Hidden("Group Size", Model.GroupSize.ToString(), new { @id = "groupSize" })
         </dd>
 
         <dd>
-            @foreach (var p in Model.Participants) {
-                @Html.Hidden(p.FullName,p.ParticipantID, new {@id = p.ParticipantID.ToString() })
-            }
+            @foreach (var p in Model.Participants)
+{
+                @Html.Hidden(p.FullName, p.ParticipantID, new { @id = p.ParticipantID.ToString(), @class = "participantList" })
+}
             @*@Html.HiddenFor(model => model.Participants)*@
         </dd>
 
@@ -47,3 +49,63 @@
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<div>
+    <table class="programTable">
+        <tr>
+            @for (int i = 0; i < Model.GroupSize + 1; i++)
+{
+    if (i == 0)
+    {
+                    <th>Course</th>
+    }
+    else if (i == 1)
+    {
+                    <th>Host</th>
+    }
+    else
+    {
+                    <th>Guest</th>
+    }
+}
+        </tr>
+        @for (int i = 0; i < Model.Participants.Count; i++)
+{
+    <tr>
+        @{int groupCount = Model.Participants.Count / Model.GroupSize; }
+        @for (int j = 0; j < groupCount; j++)
+{
+    if (j == 0)
+    {
+                <td id="course@(i / groupCount + 1)">@(i / groupCount + 1)</td>
+    }
+    else
+    {
+                <td id="p@((i * Model.GroupSize) + j)"></td>
+    }
+}
+    </tr>
+    }
+    </table>
+</div>
+<input value="Generate Program" type="button" onclick="generateProgram()" />
+
+@{
+    TempData["programData"] = "";
+        }
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" id="programSubmit" />
+    <input value="Save Program" type="submit" />
+}  
+@section Scripts {
+    @Scripts.Render("~/bundles/scripts")
+    @Scripts.Render("~/bundles/jquery")
+
+        @*<script type="text/javascript">
+                $(document).ready(listCheck());
+            </script>*@
+    }

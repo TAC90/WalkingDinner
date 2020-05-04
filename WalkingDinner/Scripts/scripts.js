@@ -80,3 +80,61 @@ function isSolo() {
         document.getElementById("lastNamePartnerTB").disabled = false;
     }
 }
+
+function listCheck() {
+    var list = document.getElementsByClassName("participantList");
+    for (var i = 0; i < list.length; i++) {
+        //console.log(list[i].getAttribute("id"));
+    }
+}
+
+function generateProgram() {
+    var program = "";
+    let participantList = document.getElementsByClassName("participantList");
+    var groupSize = document.getElementById("groupSize").getAttribute("value");
+    var participantAmount = participantList.length;
+
+    var indexArray = [];
+    for (var i = 0; i < participantAmount; i++) {
+        indexArray.push(i);
+    }
+    indexArray.sort(function (a,b) {
+        return 0.5 - Math.random();
+    })
+
+    for (var c = 0; c < groupSize; c++) {
+        //Courses
+        //console.log("Course " + (c + 1))
+        for (var g = 0; g < participantAmount / groupSize; g++) {
+            //Groups
+            var group = "";
+            for (var i = 0; i < groupSize; i++) {
+                var index = (c * (participantAmount)) + (g * groupSize) + i + 1; //Set index
+                var seq = (g * groupSize) + i; //Build up ID sequence
+                var offset = (((i * groupSize) + 1 ) * c) //Create offset per participant
+                var id = (seq + offset) % participantAmount; //Create ID according to sequence and offset
+                var participant = participantList[indexArray[id]]; //Get participant by id
+
+                
+                populateProgram(index,participant.getAttribute("name"));
+                program += (index + ":" + indexArray[id] + ",");
+
+                //console.log("Sequence: " + seq + " | Offset: " + offset + " | Id: " + id); //Check number situation
+                //console.log("i: " + index + " - p: " + participant.getAttribute("id") + " - " + participant.getAttribute("name"));
+                //group += (participant.getAttribute("name") + ", ") //Per group logging
+            }
+            //console.log(group); //Groups made
+        }
+
+    }
+    //TODO: Use Ajax to make this shit work
+    //Create program string to parse in controller
+    document.getElementById("programSubmit").value = program.toString();
+    //console.log(program);
+    alert('@(TempData["programData"]='+program.tostring()+')');
+    
+}
+
+function populateProgram(id, p) {
+    document.getElementById("p"+id).innerHTML = p;
+}

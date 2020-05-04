@@ -19,7 +19,7 @@ namespace WalkingDinner.Controllers
         // GET: Schedule
         public ActionResult Index()
         {
-            return View(db.Schedules.Where(s => s.MaxParticipants > s.Participants.Count).ToList());
+            return View(db.Schedules.Where(s => s.MaxParticipants > s.Participants.Count && s.Active == true).ToList());
         }
         
         // GET: Schedule/Details/5
@@ -117,6 +117,7 @@ namespace WalkingDinner.Controllers
             return RedirectToAction("Index");
         }
 
+        // POST: Schedule/Program/5
         public ActionResult Program(int? id)
         {
             var schedule = db.Schedules.FirstOrDefault(s => s.ScheduleID == id);
@@ -130,6 +131,18 @@ namespace WalkingDinner.Controllers
                 };
                 return View(viewmodel);
             }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Program(FormCollection fc)
+        {
+            var x = TempData["Test"];
+            //TODO: Fix Tempdata or find another way to send to controller with js, use ajax
+            var y = TempData["programSubmit"];
+            //string program = Request["programSubmit"];
+            //string program = fc.Get(0);
+            //var keys = fc.AllKeys;
             return RedirectToAction("Index");
         }
 

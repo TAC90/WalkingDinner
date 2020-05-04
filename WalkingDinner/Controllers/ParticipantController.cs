@@ -52,19 +52,26 @@ namespace WalkingDinner.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ParticipantID,Solo,FirstName,MiddleName,LastName,FirstNamePartner,MiddleNamePartner,LastNamePartner,ZipCode,Address,City,TelephoneNumber,DietComments")] Participant participant)
         {
-            //TODO: Schedule ID shennigans
-            if (ModelState.IsValid && int.TryParse(Request.QueryString["scheduleId"], out int selectedID))
+            if (int.TryParse(Request.QueryString["scheduleId"], out int selectedID))
             {
-                var schedule = db.Schedules.Find(selectedID);
-                if (schedule != null) {
-                    participant.Schedules.Add(schedule);
-                    db.Participants.Add(participant);
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "Schedule");
+                //TODO: Schedule ID shennigans
+                if (ModelState.IsValid)
+                {
+                    var schedule = db.Schedules.Find(selectedID);
+                    if (schedule != null) {
+                        participant.Schedules.Add(schedule);
+                        db.Participants.Add(participant);
+                        db.SaveChanges();
+                        return RedirectToAction("Index", "Schedule");
+                    }
                 }
+                return View(participant);
             }
-            return View(participant);
-            //TODO: Return possible Error?
+            else
+            {
+                //If schedule isn't properly selected
+                return RedirectToAction("Index", "Schedule");
+            }
         }
 
         // GET: Participant/Edit/5

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -23,6 +24,11 @@ namespace WalkingDinner.Models
         public int MaxParticipants { get; set; }
         public virtual ICollection<Participant> Participants { get; set; }
         public Dictionary<int, int> Program { get; set; } //Id as position + ParticipantId
+        [NotMapped]
+        public int AvailableSpace { get {
+                return MaxParticipants - Participants.Count;
+            }
+        }
     }
 }
 
