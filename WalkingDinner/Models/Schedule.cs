@@ -23,7 +23,8 @@ namespace WalkingDinner.Models
         [Required]
         public int MaxParticipants { get; set; }
         public virtual ICollection<Participant> Participants { get; set; }
-        public Dictionary<int, int> Program { get; set; } //Id as position + ParticipantId
+        public string Program { get; set; }
+        //public Dictionary<int, int> Program { get; set; } //Id as position + ParticipantId
         [NotMapped]
         public int AvailableSpace { get {
                 return MaxParticipants - Participants.Count;

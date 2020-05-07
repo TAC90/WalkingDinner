@@ -15,6 +15,7 @@ namespace WalkingDinner.ViewModels
         public int ScheduleID { get; set; }
         public string ScheduleTitle { get; set; }
         public int GroupSize { get; set; }
+        public string Program { get; set; }
         public ICollection<Participant> Participants { get; set; }
 
     }

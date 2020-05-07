@@ -32,26 +32,35 @@
 
     @foreach (var item in Model)
     {
-        <tr id="@item.ScheduleID" onclick="selectSchedule(@item.ScheduleID)">
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GroupSize)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxParticipants)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AvailableSpace)
-            </td>
-        </tr>
+<tr id="@item.ScheduleID" onclick="selectSchedule(@item.ScheduleID)" class="@(item.AvailableSpace == 0 ? "full" : "")">
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Date)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GroupSize)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MaxParticipants)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AvailableSpace)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ScheduleID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ScheduleID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ScheduleID })
+        @(item.AvailableSpace == 0 ? " | " : String.Empty)
+        @(item.AvailableSpace == 0 ? Html.ActionLink("Program", "Program", new { id = item.ScheduleID }) : MvcHtmlString.Empty)
+    </td>
+</tr>
     }
 
 </table>
+
+<p>Please select a schedule to continue.</p>
 
 @Html.ActionLink("Continue", "Create", "Participant", new { scheduleId = "0" }, new { @id = "selectSchedule", @hidden = "true"})
 

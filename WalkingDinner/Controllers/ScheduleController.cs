@@ -19,7 +19,7 @@ namespace WalkingDinner.Controllers
         // GET: Schedule
         public ActionResult Index()
         {
-            return View(db.Schedules.Where(s => s.MaxParticipants > s.Participants.Count && s.Active == true).ToList());
+            return View(db.Schedules.Where(s => s.Active == true).ToList()); //s.MaxParticipants > s.Participants.Count
         }
         
         // GET: Schedule/Details/5
@@ -48,10 +48,11 @@ namespace WalkingDinner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ScheduleID,Title,Date,GroupSize,MaxCouples")] Schedule schedule)
+        public ActionResult Create([Bind(Include = "ScheduleID,Active,Title,Date,GroupSize,MaxParticipants")] Schedule schedule)
         {
             if (ModelState.IsValid)
             {
+                schedule.Active = true;
                 db.Schedules.Add(schedule);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -80,7 +81,7 @@ namespace WalkingDinner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ScheduleID,Title,Date,GroupSize,MaxCouples")] Schedule schedule)
+        public ActionResult Edit([Bind(Include = "ScheduleID,Active,Title,Date,GroupSize,MaxParticipants")] Schedule schedule)
         {
             if (ModelState.IsValid)
             {
@@ -127,23 +128,33 @@ namespace WalkingDinner.Controllers
                     Participants = schedule.Participants,
                     GroupSize = schedule.GroupSize,
                     ScheduleTitle = schedule.Title,
-                    ScheduleID = schedule.ScheduleID
+                    ScheduleID = schedule.ScheduleID,
+                    Program = schedule.Program
                 };
                 return View(viewmodel);
             }
             return RedirectToAction("Index");
         }
 
+        // POST: Schedule/Program/5
         [HttpPost]
-        public ActionResult Program(FormCollection fc)
+        public ActionResult Program(string data)
         {
-            var x = TempData["Test"];
-            //TODO: Fix Tempdata or find another way to send to controller with js, use ajax
-            var y = TempData["programSubmit"];
-            //string program = Request["programSubmit"];
-            //string program = fc.Get(0);
-            //var keys = fc.AllKeys;
-            return RedirectToAction("Index");
+            //Data sample: 2|1:2,3:4,5:6,7:8
+            List<string> dataList = data.Split('|').ToList();
+            if(int.TryParse(dataList[0],out int scheduleId))
+            {
+                var schedule = db.Schedules.Find(scheduleId);
+                schedule.Program = dataList[1];
+                db.Entry(schedule).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            else
+            {
+                //TODO: Give back error?
+            }
+            //return RedirectToAction("Index"); //Does this even do anything with ajax?
+            return Json(new { redirectToUrl = Url.Action("Index","Schedule") }); //Does this even do anything with ajax?
         }
 
 

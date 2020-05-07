@@ -33,9 +33,9 @@
             };
             var schedules = new List<Schedule>
             {
-                new Schedule{ScheduleID=1, Active = true, Date=new DateTime(2020,5,10), Title="Birthday Extravaganza", MaxParticipants=8, GroupSize=4, Participants = new List<Participant>()},
-                new Schedule{ScheduleID=2, Active = false, Date=new DateTime(2020,5,14), Title="Funeral Extravaganza", MaxParticipants=12, GroupSize=3, Participants = new List<Participant>()},
-                new Schedule{ScheduleID=3, Active = true, Date=new DateTime(2020,5,30), Title="Clown Extravaganza", MaxParticipants=4, GroupSize=2, Participants = new List<Participant>()},
+                new Schedule{ScheduleID=1, Active = true, Date=new DateTime(2020,5,10), Title="Birthday Extravaganza", MaxParticipants=4, GroupSize=2, Participants = new List<Participant>()},
+                new Schedule{ScheduleID=2, Active = false, Date=new DateTime(2020,5,14), Title="Funeral Extravaganza", MaxParticipants=8, GroupSize=2, Participants = new List<Participant>()},
+                new Schedule{ScheduleID=3, Active = true, Date=new DateTime(2020,5,30), Title="Clown Extravaganza", MaxParticipants=12, GroupSize=3, Participants = new List<Participant>()},
             };
             foreach(Participant p in participants)
             {

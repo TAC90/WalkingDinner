@@ -142,6 +142,10 @@
     <Compile Include="Migrations\202005011319090_course2program.designer.cs">
       <DependentUpon>202005011319090_course2program.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005070941056_schedule-update.cs" />
+    <Compile Include="Migrations\202005070941056_schedule-update.designer.cs">
+      <DependentUpon>202005070941056_schedule-update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Participant.cs" />
     <Compile Include="ViewModels\ParticipantViewModel.cs" />
@@ -190,14 +194,13 @@
     <Content Include="Views\Schedule\Create.cshtml" />
     <Content Include="Views\Schedule\Delete.cshtml" />
     <Content Include="Views\Schedule\Details.cshtml" />
-    <Content Include="Views\Schedule\Edit.cshtml" />
-    <Content Include="Views\Schedule\-Index.cshtml" />
     <Content Include="Views\Participant\Create.cshtml" />
     <Content Include="Views\Participant\Delete.cshtml" />
     <Content Include="Views\Participant\Details.cshtml" />
     <Content Include="Views\Participant\Edit.cshtml" />
     <Content Include="Views\Participant\Index.cshtml" />
     <Content Include="Views\Schedule\Program.cshtml" />
+    <Content Include="Views\Schedule\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -221,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005011319090_course2program.resx">
       <DependentUpon>202005011319090_course2program.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005070941056_schedule-update.resx">
+      <DependentUpon>202005070941056_schedule-update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

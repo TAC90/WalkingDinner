@@ -42,27 +42,28 @@ var selectedScheduleColor = "green";
 
 function selectSchedule(scheduleID) {
     var selectedSchedule = document.getElementById(scheduleID);
+    if (selectedSchedule.className != "full") {
     var button = document.getElementById("selectSchedule");
     var selectedHref = button.getAttribute("href");
-
-    if (previousScheduleID != 0) { //Something else was clicked first, undo previous
-        var previousSchedule = document.getElementById(previousScheduleID);
-        previousSchedule.removeAttribute("style");
-    }
-    if (previousScheduleID == scheduleID) { //Clicked same one twice
-        //console.log("Clicked same one");
-        selectedSchedule.removeAttribute("style");
-        previousScheduleID = 0;
-        button.setAttribute("hidden", "true");
-    }
-    else {
-        selectedSchedule.style.backgroundColor = selectedScheduleColor;
-        previousScheduleID = scheduleID;
-        //console.log("Pass along this ID: " + scheduleID);
-        selectedHref = selectedHref.substring(0, selectedHref.lastIndexOf('=')+1)+scheduleID;
-        console.log(selectedHref);
-        button.setAttribute("href", selectedHref);
-        button.removeAttribute("hidden");
+        if (previousScheduleID != 0) { //Something else was clicked first, undo previous
+            var previousSchedule = document.getElementById(previousScheduleID);
+            previousSchedule.removeAttribute("style");
+        }
+        if (previousScheduleID == scheduleID) { //Clicked same one twice
+            //console.log("Clicked same one");
+            selectedSchedule.removeAttribute("style");
+            previousScheduleID = 0;
+            button.setAttribute("hidden", "true");
+        }
+        else {
+            selectedSchedule.style.backgroundColor = selectedScheduleColor;
+            previousScheduleID = scheduleID;
+            //console.log("Pass along this ID: " + scheduleID);
+            selectedHref = selectedHref.substring(0, selectedHref.lastIndexOf('=') + 1) + scheduleID;
+            console.log(selectedHref);
+            button.setAttribute("href", selectedHref);
+            button.removeAttribute("hidden");
+        }
     }
 }
 
@@ -109,7 +110,7 @@ function generateProgram() {
             //Groups
             var group = "";
             for (var i = 0; i < groupSize; i++) {
-                var index = (c * (participantAmount)) + (g * groupSize) + i + 1; //Set index
+                var index = (c * (participantAmount)) + (g * groupSize) + i + 1; //Set index (position)
                 var seq = (g * groupSize) + i; //Build up ID sequence
                 var offset = (((i * groupSize) + 1 ) * c) //Create offset per participant
                 var id = (seq + offset) % participantAmount; //Create ID according to sequence and offset
@@ -127,14 +128,39 @@ function generateProgram() {
         }
 
     }
-    //TODO: Use Ajax to make this shit work
-    //Create program string to parse in controller
-    document.getElementById("programSubmit").value = program.toString();
-    //console.log(program);
-    alert('@(TempData["programData"]='+program.tostring()+')');
-    
+    program = document.getElementById("scheduleId").value + "|" + program;
+    document.getElementById("programData").value = program;
+    document.getElementById("saveProgram").toggleAttribute("disabled", false);
+    console.log(program);    
 }
 
 function populateProgram(id, p) {
     document.getElementById("p"+id).innerHTML = p;
+}
+
+function saveProgram() {
+    $.ajax({
+        type: "POST",
+        url: "",
+        data: {
+            data: $("#programData").val()
+        },
+        dataType: 'text',
+        success: function (response) {
+            //alert(response)
+            console.log("Success")
+            window.location.href = response.redirectToUrl;
+        }
+    });
+};
+
+function populateProgramFromString() {
+    var programData = document.getElementById("programData").value;
+    var programArray = programData.split(",");
+    let participantList = document.getElementsByClassName("participantList");
+
+    for (var i = 0; i < programArray.length - 1; i++) {
+        var participant = programArray[i].split(":");
+        populateProgram(participant[0], participantList[participant[1]].getAttribute("name"));
+    }
 }

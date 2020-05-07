@@ -33,13 +33,15 @@
         <dd>
             @Html.DisplayFor(model => model.GroupSize)
             @Html.Hidden("Group Size", Model.GroupSize.ToString(), new { @id = "groupSize" })
+            @Html.HiddenFor(model => model.Program, new { @id = "programData" })
+            @Html.HiddenFor(model => model.ScheduleID, new { @id = "scheduleId" })
         </dd>
 
         <dd>
             @foreach (var p in Model.Participants)
-{
+            {
                 @Html.Hidden(p.FullName, p.ParticipantID, new { @id = p.ParticipantID.ToString(), @class = "participantList" })
-}
+            }
             @*@Html.HiddenFor(model => model.Participants)*@
         </dd>
 
@@ -54,58 +56,51 @@
     <table class="programTable">
         <tr>
             @for (int i = 0; i < Model.GroupSize + 1; i++)
-{
-    if (i == 0)
-    {
+            {
+                if (i == 0)
+                {
                     <th>Course</th>
-    }
-    else if (i == 1)
-    {
+                }
+                else if (i == 1)
+                {
                     <th>Host</th>
-    }
-    else
-    {
+                }
+                else
+                {
                     <th>Guest</th>
-    }
-}
+                }
+            }
         </tr>
         @for (int i = 0; i < Model.Participants.Count; i++)
-{
-    <tr>
-        @{int groupCount = Model.Participants.Count / Model.GroupSize; }
-        @for (int j = 0; j < groupCount; j++)
-{
-    if (j == 0)
-    {
-                <td id="course@(i / groupCount + 1)">@(i / groupCount + 1)</td>
-    }
-    else
-    {
-                <td id="p@((i * Model.GroupSize) + j)"></td>
-    }
-}
-    </tr>
-    }
+        {
+            <tr>
+                @{int groupCount = Model.Participants.Count / Model.GroupSize; }
+                @for (int j = 0; j < Model.GroupSize + 1; j++)
+                {
+                    if (j == 0)
+                    {
+                        <td id="course@(i / groupCount + 1)">@(i / groupCount + 1)</td>
+                    }
+                    else
+                    {
+                        <td id="p@((i * Model.GroupSize) + j)"></td>
+                    }
+                }
+            </tr>
+        }
     </table>
 </div>
-<input value="Generate Program" type="button" onclick="generateProgram()" />
+<span>
+    <input value="Generate Program" type="button" onclick="generateProgram()" />
+    <input value="Save Program" type="button" onclick="saveProgram()" id="saveProgram" disabled />
+    @*<input type="hidden" id="programData"/>*@
+</span>
 
-@{
-    TempData["programData"] = "";
-        }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <input type="hidden" id="programSubmit" />
-    <input value="Save Program" type="submit" />
-}  
 @section Scripts {
     @Scripts.Render("~/bundles/scripts")
     @Scripts.Render("~/bundles/jquery")
-
-        @*<script type="text/javascript">
-                $(document).ready(listCheck());
-            </script>*@
-    }
+<script>
+    $(document).ready(populateProgramFromString());
+</script>
+}
