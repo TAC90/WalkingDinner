@@ -26,3 +26,18 @@ textarea {
 tr.full{
     background-color: lightgray;
 }
+.programTable{
+    empty-cells: show;
+}
+    .programTable > tbody > tr {
+        height:2em;
+    }
+        .programTable > tbody > tr > td {
+            border-bottom: 1px solid lightgray;
+            padding: 5px 10px;
+        }
+        .programTable > tbody > tr > th {
+            border-bottom: 2px solid lightgray;
+            height: 50px;
+            min-width: 80px;
+        }

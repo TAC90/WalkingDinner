@@ -7,16 +7,16 @@
 <h2>Program</h2>
 
 <div>
-    <h4>ProgramViewModel</h4>
+    <h4>Generate Program</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ScheduleID)
-        </dt>
+        @*<dt>
+                @Html.DisplayNameFor(model => model.ScheduleID)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ScheduleID)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ScheduleID)
+            </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.ScheduleTitle)
@@ -32,25 +32,20 @@
 
         <dd>
             @Html.DisplayFor(model => model.GroupSize)
-            @Html.Hidden("Group Size", Model.GroupSize.ToString(), new { @id = "groupSize" })
-            @Html.HiddenFor(model => model.Program, new { @id = "programData" })
-            @Html.HiddenFor(model => model.ScheduleID, new { @id = "scheduleId" })
         </dd>
 
         <dd>
             @foreach (var p in Model.Participants)
             {
-                @Html.Hidden(p.FullName, p.ParticipantID, new { @id = p.ParticipantID.ToString(), @class = "participantList" })
+                @Html.Hidden(p.CoupleName, p.ParticipantID, new { @id = p.ParticipantID.ToString(), @class = "participantList" })
             }
             @*@Html.HiddenFor(model => model.Participants)*@
         </dd>
-
     </dl>
+    @Html.Hidden("Group Size", Model.GroupSize.ToString(), new { @id = "groupSize" })
+    @Html.HiddenFor(model => model.Program, new { @id = "programData" })
+    @Html.HiddenFor(model => model.ScheduleID, new { @id = "scheduleId" })
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
 
 <div>
     <table class="programTable">
@@ -63,11 +58,11 @@
                 }
                 else if (i == 1)
                 {
-                    <th>Host</th>
+                    <th>Host(s)</th>
                 }
                 else
                 {
-                    <th>Guest</th>
+                    <th>Guest(s)</th>
                 }
             }
         </tr>
@@ -79,7 +74,7 @@
                 {
                     if (j == 0)
                     {
-                        <td id="course@(i / groupCount + 1)">@(i / groupCount + 1)</td>
+                        <td id="course@(i / groupCount + 1)">@(i % groupCount == 0 ? (i / groupCount + 1).ToString() : string.Empty)</td>
                     }
                     else
                     {
@@ -90,17 +85,26 @@
         }
     </table>
 </div>
+<br />
 <span>
+    @if (Model.MaxParticipants == Model.Participants.Count) //TODO: Check if participants are full and allowed to generate
+    {
     <input value="Generate Program" type="button" onclick="generateProgram()" />
     <input value="Save Program" type="button" onclick="saveProgram()" id="saveProgram" disabled />
-    @*<input type="hidden" id="programData"/>*@
+    }
 </span>
+
+<p>
+    <br />
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ScheduleID }) |
+    @Html.ActionLink("Back", "Index")
+</p>
 
 
 @section Scripts {
     @Scripts.Render("~/bundles/scripts")
     @Scripts.Render("~/bundles/jquery")
-<script>
-    $(document).ready(populateProgramFromString());
-</script>
+    <script>
+        $(document).ready(populateProgramFromString());
+    </script>
 }

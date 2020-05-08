@@ -46,11 +46,11 @@
         @Html.DisplayFor(modelItem => item.MaxParticipants)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.AvailableSpace)
+        @(item.AvailableSpace != 0 ? @Html.DisplayFor(modelItem => item.AvailableSpace) : new MvcHtmlString("Full"))
     </td>
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.ScheduleID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.ScheduleID }) |
+        @*@Html.ActionLink("Details", "Details", new { id = item.ScheduleID }) |*@
         @Html.ActionLink("Delete", "Delete", new { id = item.ScheduleID })
         @(item.AvailableSpace == 0 ? " | " : String.Empty)
         @(item.AvailableSpace == 0 ? Html.ActionLink("Program", "Program", new { id = item.ScheduleID }) : MvcHtmlString.Empty)
@@ -63,14 +63,6 @@
 <p>Please select a schedule to continue.</p>
 
 @Html.ActionLink("Continue", "Create", "Participant", new { scheduleId = "0" }, new { @id = "selectSchedule", @hidden = "true"})
-
-@*@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <input type="hidden" id="selectedSchedule" required="required" />
-    <input type="submit" value="Continue">
-}*@
-
 
 
 @section Scripts {

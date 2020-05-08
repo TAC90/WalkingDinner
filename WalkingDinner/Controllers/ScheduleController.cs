@@ -19,7 +19,7 @@ namespace WalkingDinner.Controllers
         // GET: Schedule
         public ActionResult Index()
         {
-            return View(db.Schedules.Where(s => s.Active == true).ToList()); //s.MaxParticipants > s.Participants.Count
+            return View(db.Schedules.Where(s => s.Active == true && s.Date > DateTime.Now).ToList()); //s.MaxParticipants > s.Participants.Count
         }
         
         // GET: Schedule/Details/5
@@ -126,6 +126,7 @@ namespace WalkingDinner.Controllers
                 var viewmodel = new ProgramViewModel()
                 {
                     Participants = schedule.Participants,
+                    MaxParticipants = schedule.MaxParticipants,
                     GroupSize = schedule.GroupSize,
                     ScheduleTitle = schedule.Title,
                     ScheduleID = schedule.ScheduleID,
