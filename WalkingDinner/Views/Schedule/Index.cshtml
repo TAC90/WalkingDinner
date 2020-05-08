@@ -51,7 +51,7 @@
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.ScheduleID }) |
         @*@Html.ActionLink("Details", "Details", new { id = item.ScheduleID }) |*@
-        @Html.ActionLink("Delete", "Delete", new { id = item.ScheduleID })
+        @Html.ActionLink("Remove", "Remove", new { id = item.ScheduleID })
         @(item.AvailableSpace == 0 ? " | " : String.Empty)
         @(item.AvailableSpace == 0 ? Html.ActionLink("Program", "Program", new { id = item.ScheduleID }) : MvcHtmlString.Empty)
     </td>

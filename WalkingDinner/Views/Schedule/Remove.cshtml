@@ -1,0 +1,56 @@
+﻿@model WalkingDinner.Models.Schedule
+
+@{
+    ViewBag.Title = "Remove";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to remove this?</h3>
+<div>
+    <h4>Schedule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GroupSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroupSize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxParticipants)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxParticipants)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Remove" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -26,6 +26,12 @@ textarea {
 tr.full{
     background-color: lightgray;
 }
+
+input[type="button"][disabled]
+{
+    color:lightgray;
+}
+
 .programTable{
     empty-cells: show;
 }

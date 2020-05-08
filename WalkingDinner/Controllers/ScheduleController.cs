@@ -92,6 +92,33 @@ namespace WalkingDinner.Controllers
             return View(schedule);
         }
 
+        // GET: Schedule/Remove/5
+        public ActionResult Remove(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Schedule schedule = db.Schedules.Find(id);
+            if (schedule == null)
+            {
+                return HttpNotFound();
+            }
+            return View(schedule);
+        }
+
+        // POST: Schedule/Remove/5
+        [HttpPost, ActionName("Remove")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveConfirmed(int id)
+        {
+            Schedule schedule = db.Schedules.Find(id);
+            //db.Schedules.Remove(schedule);
+            schedule.Active = false;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         // GET: Schedule/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -113,7 +140,7 @@ namespace WalkingDinner.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Schedule schedule = db.Schedules.Find(id);
-            db.Schedules.Remove(schedule);
+            db.Schedules.Remove(schedule); 
             db.SaveChanges();
             return RedirectToAction("Index");
         }
