@@ -20,6 +20,7 @@ namespace WalkingDinner.Models
         [DisplayName("Title of Event")]
         public string Title { get; set; }
         [DisplayName("Date")]
+        [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
         [Required]
         [DisplayName("Group Size")]

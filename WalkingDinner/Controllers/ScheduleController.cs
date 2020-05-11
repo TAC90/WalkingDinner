@@ -81,7 +81,7 @@ namespace WalkingDinner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ScheduleID,Active,Title,Date,GroupSize,MaxParticipants")] Schedule schedule)
+        public ActionResult Edit([Bind(Include = "ScheduleID,Active,Title,Date,GroupSize,MaxParticipants,Program")] Schedule schedule)
         {
             if (ModelState.IsValid)
             {
@@ -182,7 +182,7 @@ namespace WalkingDinner.Controllers
                 //TODO: Give back error?
             }
             //return RedirectToAction("Index"); //Does this even do anything with ajax?
-            return Json(new { redirectToUrl = Url.Action("Index","Schedule") }); //Does this even do anything with ajax?
+            return Json(new { redirectToUrl = Url.Action("Index","Schedule") }); //Create Json to tell frontend ajax call to redirect to correct page
         }
 
 
